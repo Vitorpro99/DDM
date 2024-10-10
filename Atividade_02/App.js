@@ -1,7 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,SafeAreaView, Text, View,FlatList, Image,Pressable } from 'react-native';
+import * as Speech from 'expo-speech';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function App() {
+
 
   const DADOS = [
     {
@@ -50,15 +53,17 @@ export default function App() {
       descricao: 'O Corolla sempre foi sinônimo de confiabilidade, conforto e baixa desvalorização, o que fez dele um favorito entre os sedãs médios. A versão com motor flex de 2015 também impulsionou suas vendas.'
     }
   ];
+  
 
   const criaItem = ({item}) => 
     <View style={styles.item}>
-      <Text style={styles.itemTexto}>{ item.id }</Text>
+      {/* <Text style={styles.itemTexto}>{ item.id }</Text> */}
       <Text style={styles.itemTexto}>{ item.marca } {item.modelo}</Text>
       <Text style={styles.itemTexto}>Ano de auge: { item.ano }</Text>
       <Text style={styles.itemTexto}>Vendas: { item.vendas }</Text>
       <Image source={item.foto} style={styles.foto} />
-      <Pressable style={styles.botao}><Text style={styles.botaoTexto}>Saiba mais</Text></Pressable>
+      <Pressable style={styles.botao} onPress={() => {alert(item.descricao); Speech.speak(`${item.descricao}`, {language:"pt-br", rate: 1.5
+      }) }}><Text style={styles.botaoTexto}>Saiba mais</Text></Pressable>
     </View>
 
   return (
@@ -69,6 +74,7 @@ export default function App() {
     </View>
     <View style={styles.container}>
       
+     
       
     <FlatList
       data={DADOS}
@@ -84,9 +90,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    justifyContent: 'center',alignContent: 'center',
     justifyContent: 'center',
-    marginTop: StatusBar.currentHeight || 20,
+    paddingTop: StatusBar.currentHeight || 30,
     width: '100%',
+    backgroundColor: 'gray',
+    borderRadius:5,
   },
 
   titulo:{
@@ -103,8 +112,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginVertical: 10,
     borderRadius: 10,
+    borderColor:'transparent',
     alignContent: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignContent:'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor:'white'
   },
   itemTexto:{
     alignContent:"center",
@@ -118,27 +132,27 @@ const styles = StyleSheet.create({
     height: 100,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   foto:{
     width: 400,
     height: 200,
     marginBottom: 10,
-    borderRadius: 50,
+    borderRadius: 10,
     marginHorizontal: 10,
   },
   botao:{
     backgroundColor:'red',
-    alignContent: 'center',
-    justifyContent: 'center',
     borderRadius: 25,
     width: '50%',
+    marginVertical: 10,
   },
   botaoTexto:{
-    alignContent: 'center',
-    textAlign: 'center',
     fontSize:20,
     color: '#fff',
     alignSelf: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
     
   }
 });
