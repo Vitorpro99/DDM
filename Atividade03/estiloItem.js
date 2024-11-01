@@ -7,13 +7,13 @@ export default StyleSheet.create({
     borderColor:'transparent',
     alignContent: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     backgroundColor:'white'
     },
     imagem:{
-        width: 200,
-        height: 100,
+        width: 400,
+        height: 200,
         marginBottom: 10,
         borderRadius: 10,
         marginHorizontal: 5, 
@@ -23,5 +23,28 @@ export default StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
-    }
+    },
+    descricao:{
+        marginHorizontal:20
+    },
+    input: {
+        backgroundColor: 'white',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginTop: 2,
+        alignSelf:'center',
+        
+      },
+      informacoes:{
+        alignSelf:'center',
+      },
+      container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical:20
+    },
+
 })

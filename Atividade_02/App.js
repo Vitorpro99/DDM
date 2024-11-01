@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     alignSelf: 'center',
     alignContent: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center',20
     
   }
 });

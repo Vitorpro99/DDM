@@ -1,16 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList, TextInput } from 'react-native';
 import { createDrawerNavigator} from '@react-navigation/drawer'
 import { NavigationContainer} from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MapView from 'react-native-maps'
 import { Marker } from 'react-native-maps'
 import styleItem from './estiloItem.js'
+import estiloItem from './estiloItem.js';
 
 function IfBage({ navigation }){
   return(
-    <View>
-      <Text>IFSul Campus Bagé</Text>
+    <View style={estiloItem.container}>
+      <StatusBar style="light" backgroundColor='green' translucent={false}/>
+      <Text style={estiloItem.titulo}>IFSul Campus Bagé</Text>
       <MapView style={{width:"100%", height: "80%"}} initialRegion={{latitude:-31.331792, 
     longitude:-54.071812,
     latitudeDelta: 0.01,
@@ -22,13 +24,19 @@ function IfBage({ navigation }){
         description='Campus do IFSul da cidade de Bagé'
         />
     </MapView>
+    <Text style={estiloItem.informacoes}>Endereço</Text>
+    <Text style={estiloItem.input}>Av. Leonel de Moura Brizola - Pedras Brancas Bagé - RS</Text>
+    <Text style={estiloItem.informacoes}>Contato</Text>
+    <Text style={estiloItem.input}>(53) 99947-7902</Text>
+    <Text style={estiloItem.input}>gabdirbage@ifsul.edu.br</Text>
     </View>
   )
 }
 function IfPel({ navigation }){
   return(
-    <View>
-      <Text>IFSul Campus Pelotas</Text>
+    <View style={estiloItem.container}>
+      <StatusBar style="light" backgroundColor='green' translucent={false}/>
+      <Text style={estiloItem.titulo}>IFSul Campus Pelotas</Text>
       <MapView style={{width:"100%", height: "80%"}} initialRegion={{
     latitude:-31.766325, 
     longitude:-52.351992,
@@ -42,15 +50,19 @@ function IfPel({ navigation }){
         />
 
     </MapView>
-
+    <Text style={estiloItem.informacoes}>Endereço</Text>
+    <Text style={estiloItem.input}>Praça 20 de Setembro, 455 - Centro, Pelotas - RS</Text>
+    <Text style={estiloItem.informacoes}>Contato</Text>
+    <Text style={estiloItem.input}>(53) 2123-1000</Text>
     </View>
   )
 }
 
 function IfSantana({ navigation }){
   return(
-    <View>
-      <Text>IFSul Campus Santana do Livramento</Text>
+    <View style={estiloItem.container}>
+      <StatusBar style="light" backgroundColor='green' translucent={false}/>
+      <Text style={estiloItem.titulo}>IFSul Campus Santana do Livramento</Text>
       <MapView style={{width:"100%", height: "80%"}} initialRegion={{
     latitude:-30.900849  , 
     longitude:-55.53291,
@@ -64,6 +76,11 @@ function IfSantana({ navigation }){
         />
 
     </MapView>
+    <Text style={estiloItem.informacoes}>Endereço</Text>
+    <Text style={estiloItem.input}>Av. Paul Harris, 410 - Fortim, Sant'Ana do Livramento - RS</Text>
+    <Text style={estiloItem.informacoes}>Contato</Text>
+    <Text style={estiloItem.input}>(55) 3621-1190</Text>
+  
     </View>
   )
 }
@@ -76,7 +93,7 @@ const DADOS = [
   {
     id:'2',
     foto: require('./assets/pelotas.jpg'),
-    descricao: 'Inaugurado em 1917 como Escola de Aprendizes e Artífices, é o campus mais antigo do IFSul. Hoje, destaca-se como um centro de excelência em formação técnica e tecnológica no sul do Brasil, com cursos variados e ampla estrutura.'
+    descricao: 'Campus Pelotas: Inaugurado em 1917 como Escola de Aprendizes e Artífices, é o campus mais antigo do IFSul. Hoje, destaca-se como um centro de excelência em formação técnica e tecnológica no sul do Brasil, com cursos variados e ampla estrutura.'
   },
   {
     id: '3',
@@ -94,12 +111,14 @@ const criaItem = ({item}) =>
 
 function CampusLista({}){
   return(
-    <View>
+    <View style={styleItem.item}>
+      <StatusBar style="light" backgroundColor='green' translucent={false}/>
       <Text style={styleItem.titulo}>Lista de Campus do IFSUL</Text>
       <FlatList
       data={DADOS}
       renderItem={criaItem}
       />
+      
     </View>
   )
 }
