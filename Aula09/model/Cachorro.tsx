@@ -1,37 +1,42 @@
-import * as Speech from 'expo-speech';
+import * as Speech from "expo-speech";
+
 export class Cachorro{
     public id: number;
     public nome: string;
     public raca: string;
     public pelagem: string;
-    public datanasc: number;
+    public datanasc: string;
 
     constructor(obj?: Partial<Cachorro>){
-        if(obj){
-            this.id     = obj.id;
-            this.nome   = obj.nome;
-            this.raca   = obj.nome;
-            this.pelagem = obj.pelagem;
-            this.datanasc = obj.datanasc;
+        if (obj){
+            this.id     = obj.id
+            this.nome   = obj.nome
+            this.raca   = obj.raca
+            this.pelagem = obj.pelagem
+            this.datanasc= obj.datanasc
         }
     }
 
-    toObject(){
+    toObjeto(){
         const cachorro = {
-            id : this.id,
-            nome : this.nome,
-            raca : this.raca,
+            id      : this.id,
+            nome    : this.nome,
+            raca    : this.raca,
             pelagem : this.pelagem,
-            datanasc : this.datanasc
+            datanasc: this.datanasc
         }
         return cachorro;
     }
 
     toString(){
-        const atributos = Object.values(this).join(', ');
-        return `Cachorro [${atributos}]`
+        const atributos = Object.values(this).join(',');
+        return `Cachorro [${atributos}]`;
+
+        // Cachorro[{id:1, nome:Pulga, raca:Vira Lata, ...}]
     }
+
     latir(){
-        Speech.speak("Au au au au")
+        Speech.speak("Au au au au");
     }
+
 }

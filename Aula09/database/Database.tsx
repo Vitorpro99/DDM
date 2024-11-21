@@ -1,4 +1,4 @@
-import * as SQLite from 'expo-sqlite'
+import * as SQLite from 'expo-sqlite';
 
 interface Query {
     sql: string
@@ -9,15 +9,15 @@ const table = "cachorro"
 
 export class Database {
     static getConnection() {
-        return SQLite.openDatabase("cachorroapp.db")
+        return SQLite.openDatabaseAsync("cachorroapp.db")
     }
 
     static async initDb(syncDb?: boolean) {
         const db = this.getConnection()
-        // console.log(db)
-        db.exec([{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], false, (err, data) => {
-            console.log('Foreign keys ON')
-        })
+        console.log(db)
+        // ;(await db).runAsync([{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], false, (err, data) => {
+        //     console.log('Foreign keys ON')
+        // })
 
         if (syncDb || !(await this.isDbCreated())) {
             await this.dropDb()
@@ -28,11 +28,10 @@ export class Database {
 
     static async ReinitDb(syncDb?: boolean) {
         const db = this.getConnection()
-
-        // console.log(db)
-        db.exec([{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], false, (err, data) => {
-            console.log('Foreign keys ON')
-        })
+        console.log(db)
+        // ;(await db).runAsync([{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], false, (err, data) => {
+        //     console.log('Foreign keys ON')
+        // })
 
         await this.dropDb()
         await this.createDb()
@@ -49,63 +48,35 @@ export class Database {
     }
 
     private static async dropDb() {
-        const queries = [
-            `DROP TABLE IF EXISTS 'cachorro';`,            
-        ]
-        await this.runQueries(queries.map(sql => ({ sql })))
+        const db = this.getConnection();
+        const queries = `DROP TABLE IF EXISTS 'cachorro';` ;
+        (await db).runAsync(queries);
     }
 
 
 
     private static async createDb() {
-        const queries = [
+        const db = this.getConnection();
+        const queries = 
             `create table if not exists cachorro (
                 id integer primary key autoincrement,
                 nome text,
                 raca text,
                 pelagem text,
-                datanascimento text              
-                );`,
-        ]
-        await this.runQueries(queries.map(sql => ({ sql })))
+                datanasc text              
+                );`;
+        (await db).runAsync(queries);
     }
-
-    private static async runQueries(queries: Query[]) {
-        const db = this.getConnection()
-
-        return new Promise<void>((resolve, reject) => {
-            db.transaction(transaction => {
-                for (const query of queries) {
-                    transaction.executeSql(query.sql, query.args)
-                }
-            }, error => {
-                console.error(`Error in transaction.`, error)
-                reject(error)
-            }, /* success */() => {
-                // console.log(`Transaction completed`)
-                resolve()
-            })
-        })
-    }
-
 
     static async runQuery(sql: Query['sql'], args?: Query['args']) {
         const db = this.getConnection()
+        const result = (await db).runAsync(sql,args);
+        return((await result).lastInsertRowId);
+    }
 
-        return new Promise<SQLite.SQLResultSet>((resolve, reject) => {
-            db.transaction(transaction => {
-                transaction.executeSql(sql, args, (tx, result) => {
-                    resolve(result)
-                }, (tx, error) => {
-                    reject(error)
-                    return true
-                })
-            }, error => {
-                // console.error(`Error in transaction.`, error)
-                reject(error)
-            }, /* success */() => {
-                console.log(`Transaction completed`)
-            })
-        })
+    static async getAll() {
+        const db = this.getConnection()
+        const result = (await db).getAllAsync(`SELECT * FROM  ${table};`);
+        return result;
     }
 }

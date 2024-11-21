@@ -10,14 +10,15 @@ export class CachorroService {
             nome,
             raca,
             pelagem,
-            datanascimento) 
-            VALUES (?,?,?,?,?)`, [
+            datanasc) 
+            VALUES (?,?,?,?)`, [
                 obj.nome,             
                 obj.raca,
-                // obj.sexo,             
-                // obj.datanascimento            
+                obj.pelagem,             
+                obj.datanasc            
         ])
-        obj.id = result.insertId
+        console.log(result);
+        obj.id = result;
         return obj
     }
 
@@ -26,13 +27,13 @@ export class CachorroService {
         set nome =? ,   
         raca =? ,  
         sexo =? ,  
-        datanascimento =?  
+        datanasc =?  
         WHERE id = ?;`
         const result = await Database.runQuery(query, [
             obj.nome,            
             obj.raca, 
-            obj.sexo,           
-            obj.datanascimento,            
+            obj.pelagem,           
+            obj.datanasc,            
             obj.id
         ])
         return result.rowsAffected > 0
@@ -65,9 +66,8 @@ export class CachorroService {
     }
 
     static async findAll() {
-        const query = `SELECT * FROM ${this.TABLE};`
-        const result = await Database.runQuery(query)
-        return result.rows._array.map(row => new Cachorro(row))
+        const allRows = await Database.getAll();
+        return allRows.map(row => new Cachorro(row))
     }
  
 
