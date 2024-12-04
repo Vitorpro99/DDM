@@ -68,18 +68,20 @@ export class VeiculoService {
     }
 
     static async findById(id: number) {
-        const query = `SELECT * FROM ${this.TABLE} WHERE id = ?;`
-        const result = await Database.runQuery(query, [id])
-
-        if (result.rows.length != 1) {
-            throw new Error('Veiculo não existe')
+        const query = `SELECT * FROM ${this.TABLE} WHERE id = ?;`;
+        const result = await Database.runQuery(query, [id]);
+        console.log('Resultado da query findById:', result);
+    
+        if (!result || !result.rows || result.rows.length !== 1) {
+            throw new Error('Veiculo não existe');
         }
-
-        const raw = result.rows.item(0)
-        const obj = new Veiculo(raw)
-
-        return obj
+    
+        const raw = result.rows.item(0);
+        const obj = new Veiculo(raw);
+    
+        return obj;
     }
+    
 
     static async findAll() {
         const allRows = await Database.getAll();
