@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-const styles = StyleSheet.create({
+const stylesOver = StyleSheet.create({
     image: {
          
         border: 1,
@@ -8,41 +8,44 @@ const styles = StyleSheet.create({
         shadowColor:'black',
         shadowOffset:1,
         shadowOpacity:0.5,
-        shadowRadius:5,
+        shadowRadius:2,
         elevation:5,
         marginBottom:10,
-        height:150,
-        width:220
-        
-        
+        height:225,
+        width:400  
     },
     titulo:{
-        fontSize: 19,
+        fontSize: 30,
         fontWeight: 'bold', 
         marginBottom: 10, 
-        alignSelf:'left',
-        marginLeft: 10,
+        alignSelf:'center',
+        color:'white'
         
+    },
+    tituloDescricao:{
+        fontSize: 20,
+        fontWeight: 'bold', 
+        marginBottom: 10, 
+        alignSelf:'center',
+        color:'white'
+    },
+    overlay:{
+        border:1,
+        borderRadius:20,
     },
     seletor:{
         width: '90%',
         color:'red',
         width:'auto',
     },
-    mainContainer:{
-        flex:1,
-        backgroundColor: '#f2f2f2',
-        padding:10,
-        alignContent:'center',
-        justifyContent:'center',
-        alignItems:'center',
-        paddingTop:20,
-        paddingBottom:20,
-        width: '100%',
-        borderRadius:10,
-        marginBottom:20,
-    },
-    botao:{
+boxExterna:{
+    alignContent:'center',
+    alignItems:'center',
+    flexDirection:'column',        
+    
+
+},
+    delet:{
         width: '50%',
         height: 'auto',
         backgroundColor: '#ff0000', 
@@ -52,24 +55,10 @@ const styles = StyleSheet.create({
         justifyContent:'right',
         marginBottom:10
     },
-    box:{
-        justifyContent: 'center',
-        marginTop:25,
-        alignContent: 'center',
-        alignItems: 'center',
-        flex:1,
-        flexDirection:'row',        
-        backgroundColor: '#eb4034',
-        padding:'10',
-        border:1,
-        borderRadius:10
-        
-        
-    },
-    delet:{
+    fechar:{
         width: '50%',
         height: 'auto',
-        backgroundColor: '#ff0000', 
+        backgroundColor: '#34a600', 
         textAlign:'center',
         border: 1,
         borderRadius:10,
@@ -108,10 +97,9 @@ const styles = StyleSheet.create({
     textbutton:{
         textAlign:'center',
         color:'white',
-        
+        marginBottom:10
     },
     info:{
-        flex:1,
 
         flexDirection:'row',
         justifyContent:'center',
@@ -119,9 +107,13 @@ const styles = StyleSheet.create({
         margin:5,
         gap:'15%',
         width:'75%',
-        
 
-    },  
+    },
+    descricao:{
+        fontSize:20,
+        marginBottom:20,
+        color:'white'
+    },
     exbox:{
         paddingHorizontal:10,
         // gap: '10px'
@@ -129,20 +121,12 @@ const styles = StyleSheet.create({
     preco:{
         fontWeight:'bold',
         fontSize: 15,
+        color:'white'
     },
     kmRodados:{
-        fontWeight:'semibold'
-    },
-    textInput:{
-        width: '75%',
-        height: 40,
-        borderColor: '#000',
-        borderWidth: 1,
-        marginBottom:10,
-        color:'black',
-        border: 1,
-        borderRadius:30
+        fontWeight:'bold',
+        color:'white'
     }
     
 });
-export default styles
+export default stylesOver

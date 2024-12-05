@@ -55,10 +55,10 @@ export class VeiculoService {
         return result.rowsAffected > 0
     }
 
-    static async delete(obj: Veiculo) {
+    static async delete(id) {
 
         const query = `DELETE FROM ${this.TABLE} WHERE id = ?;`
-        const result = await Database.runQuery(query, [obj.id])
+        const result = await Database.runQuery(query, [id])
 
         return result.rowsAffected > 0
     }
